@@ -1,0 +1,818 @@
+/* Global styles for toastdo ♡︎.ᐟજ⁀➴ */
+
+:root {
+	/* Light theme */
+	--bg-primary: #7c7364;
+	--bg-secondary: #e8ddc2;
+	--text-primary: #2d2d2d;
+	--text-secondary: #666666;
+	--accent: #c4a881;
+	--accent-hover: #b8a078;
+	--border: #d4c5a1;
+	--completed: #a89775;
+	--shadow: rgba(0, 0, 0, 0.15);
+	--window-bg: #f9f6ec;
+	--window-header: #727066;
+	--window-text: #f3eeda;
+}
+
+[data-theme='dark'] {
+	/* Dark theme */
+	--bg-primary: #3a2b21;
+	--bg-secondary: #2d2d2d;
+	--text-primary: #e8e8e8;
+	--text-secondary: #b8b8b8;
+	--accent: #b8a078;
+	--accent-hover: #a89775;
+	--border: #404040;
+	--completed: #9d8a6f;
+	--shadow: rgba(0, 0, 0, 0.4);
+	--window-bg: #2a2a2a;
+	--window-header: #4a4a4a;
+	--window-text: #e8e8e8;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Architype Stedelijk', sans-serif;
+	letter-spacing: 2.5px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--bg-primary);
+	color: var(--text-primary);
+	transition: background-color 0.3s ease, color 0.3s ease;
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+/* App container with background */
+.app {
+	min-height: 100vh;
+	position: relative;
+	background-image: url('/background.jpg');
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+.background-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--bg-primary);
+	opacity: 0.85;
+	z-index: 0;
+	transition: background-color 0.3s ease;
+}
+
+/* Capybara logo */
+.capybara-logo {
+	position: fixed;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 100;
+	width: 150px;
+	height: 150px;
+	overflow: hidden;
+	transition: all 0.3s ease;
+}
+
+.capybara-logo:hover {
+	transform: translateX(-50%) scale(1.1);
+}
+
+.capybara-logo img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+/* Theme toggle */
+.theme-toggle {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background: var(--window-header);
+	border: none;
+	border-radius: 20px;
+	padding: 0.5rem 1rem;
+	color: var(--window-text);
+	cursor: pointer;
+	font-size: 1rem;
+	transition: all 0.3s ease;
+	z-index: 100;
+	box-shadow: 0 2px 8px var(--shadow);
+}
+
+.theme-toggle:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px var(--shadow);
+}
+
+/* Main content layout */
+.app-content {
+	position: relative;
+	z-index: 10;
+	display: flex;
+	gap: 2rem;
+	padding: 200px 2rem 60px;
+	min-height: 100vh;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+/* Right side container for shelf and music player */
+.right-side {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	align-items: center;
+}
+
+/* Window styling */
+.task-window,
+.music-window {
+	background-color: var(--window-bg);
+	border: 2px solid var(--border);
+	border-radius: 8px;
+	box-shadow: 0 8px 24px var(--shadow);
+	min-width: 320px;
+	max-width: 400px;
+	transition: all 0.3s ease;
+}
+
+.task-window {
+	width: 400px;
+	max-height: 70vh;
+	overflow: hidden;
+}
+
+.music-window {
+	width: 280px;
+	position: sticky;
+	top: 120px;
+}
+
+.task-window:hover,
+.music-window:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 12px 32px var(--shadow);
+}
+
+/* Window header styling - matching your design */
+.window-header {
+	height: 28px;
+	background-color: var(--window-header);
+	border-bottom: 1px solid #222;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 0.5rem;
+	color: var(--window-text);
+	cursor: move;
+	user-select: none;
+}
+
+.player-title {
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+
+.player-controls {
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+}
+
+.window-hyphen,
+.window-square {
+	font-size: 1.1rem;
+	line-height: 1;
+	font-weight: bold;
+	color: var(--window-text);
+	user-select: none;
+	letter-spacing: 10px;
+}
+
+.window-close {
+	cursor: pointer;
+	font-size: 1rem;
+	line-height: 1;
+	font-weight: bold;
+	color: var(--window-text);
+	user-select: none;
+	font-family: monospace;
+	padding: 0 4px;
+	border-radius: 2px;
+	transition: background-color 0.2s ease;
+}
+
+.window-close:hover {
+	background-color: rgba(255, 0, 0, 0.8);
+}
+
+/* Window content */
+.window-content {
+	padding: 1rem;
+	max-height: calc(70vh - 28px);
+	overflow-y: auto;
+}
+
+/* Task form */
+.add-task-form {
+	margin-bottom: 1rem;
+}
+
+.add-task-input {
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	background-color: var(--bg-secondary);
+	color: var(--text-primary);
+	font-size: 0.875rem;
+	transition: all 0.3s ease;
+}
+
+.add-task-input:focus {
+	outline: none;
+	border-color: var(--accent);
+	box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.1);
+}
+
+.add-task-input::placeholder {
+	color: var(--text-secondary);
+}
+
+/* Task list */
+.task-list {
+	list-style: none;
+	margin-bottom: 1rem;
+}
+
+.task-item {
+	background-color: var(--bg-secondary);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	padding: 0.75rem;
+	margin-bottom: 0.5rem;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	transition: all 0.3s ease;
+	position: relative;
+}
+
+.task-item:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 2px 8px var(--shadow);
+}
+
+.task-item.completed {
+	opacity: 0.6;
+}
+
+.task-checkbox {
+	width: 18px;
+	height: 18px;
+	border-radius: 3px;
+	border: 2px solid var(--border);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s ease;
+	flex-shrink: 0;
+	font-size: 0.75rem;
+}
+
+.task-checkbox:hover {
+	border-color: var(--completed);
+}
+
+.task-checkbox.checked {
+	background-color: var(--completed);
+	border-color: var(--completed);
+	color: white;
+}
+
+.task-text {
+	flex: 1;
+	font-size: 0.875rem;
+	transition: all 0.3s ease;
+}
+
+.task-text.completed {
+	text-decoration: line-through;
+	color: var(--text-secondary);
+}
+
+.task-input {
+	flex: 1;
+	background: none;
+	border: none;
+	color: var(--text-primary);
+	font-size: 0.875rem;
+	outline: none;
+	border-bottom: 1px solid var(--accent);
+	padding: 0.25rem 0;
+}
+
+.task-actions {
+	display: flex;
+	gap: 0.25rem;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+}
+
+.task-item:hover .task-actions {
+	opacity: 1;
+}
+
+.task-btn {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0.25rem 0.5rem;
+	border-radius: 3px;
+	color: var(--text-secondary);
+	transition: all 0.3s ease;
+	font-size: 0.75rem;
+}
+
+.task-btn:hover {
+	background-color: var(--border);
+	color: var(--text-primary);
+}
+
+.task-btn.delete:hover {
+	background-color: var(--accent);
+	color: white;
+}
+
+.completed-header {
+	color: var(--text-secondary);
+	margin-bottom: 0.75rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+}
+
+.collapsible-header {
+	background: none;
+	border: none;
+	color: var(--text-secondary);
+	margin-bottom: 0.75rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem;
+	border-radius: 4px;
+	transition: all 0.3s ease;
+	width: 100%;
+	text-align: left;
+}
+
+.collapsible-header:hover {
+	background-color: var(--bg-secondary);
+	color: var(--text-primary);
+}
+
+.collapse-icon {
+	font-size: 0.75rem;
+	transition: transform 0.3s ease;
+	color: var(--accent);
+}
+
+.completed-list {
+	animation: slideDown 0.3s ease-out;
+	overflow: hidden;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		max-height: 0;
+		transform: translateY(-10px);
+	}
+	to {
+		opacity: 1;
+		max-height: 500px;
+		transform: translateY(0);
+	}
+}
+
+.empty-state {
+	text-align: center;
+	padding: 2rem 1rem;
+	color: var(--text-secondary);
+}
+
+.empty-kaomoji {
+	font-size: 2rem;
+	margin-bottom: 0.75rem;
+	display: block;
+}
+
+/* Music player */
+.music-window {
+	width: 280px;
+	position: sticky;
+	top: 120px;
+}
+
+.window-content {
+	padding: 1rem;
+	max-height: calc(70vh - 28px);
+	overflow-y: auto;
+}
+
+/* Shelf Section */
+.shelf-section {
+	margin-bottom: 1.5rem;
+}
+
+.on-shelf {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	gap: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.digital-clock {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	height: 50px;
+	background: #e1e0de;
+	border-radius: 5px;
+	box-shadow: 0 2px 8px var(--shadow);
+}
+
+.clock-screen {
+	width: 105px;
+	height: 35px;
+	background: #161616;
+	border-radius: 3px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.clock-display {
+	margin: 0;
+	font-weight: 10;
+	font-family: 'Architype Stedelijk', monospace;
+	color: #f2dbb7;
+	letter-spacing: 3px;
+	font-size: 2rem;
+}
+
+.plant {
+	height: 80px;
+	width: 40px;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+}
+
+.plant-icon {
+	font-size: 2rem;
+	line-height: 1;
+}
+
+.shelf {
+	width: 100%;
+	height: 8px;
+	background: #333;
+	border-radius: 2px;
+	box-shadow: 0 2px 4px var(--shadow);
+}
+
+/* Standalone Shelf (outside windows) */
+.shelf-standalone {
+	margin-bottom: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/* Standalone Music Player (outside windows) */
+.music-player-standalone {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+	padding: 1.5rem;
+	background: var(--window-bg);
+	border-radius: 12px;
+	border: 2px solid var(--border);
+	box-shadow: 0 4px 12px var(--shadow);
+	transition: all 0.3s ease;
+}
+
+.music-player-standalone:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px var(--shadow);
+}
+
+/* Player Section */
+.player-section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.player-cable {
+	width: 4px;
+	height: 20px;
+	background: #666;
+	border-radius: 2px;
+}
+
+.player-box {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 120px;
+	height: 120px;
+	background: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 12px var(--shadow);
+	position: relative;
+}
+
+.disk {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+	height: 80%;
+	background: #1a1a1a;
+	border-radius: 50%;
+	position: relative;
+	animation-duration: 10s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	animation-play-state: paused;
+}
+
+.disk.disk-animation {
+	animation-name: disk-spin;
+	animation-play-state: running;
+}
+
+@keyframes disk-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.disk-light,
+.disk-light-alt {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 5;
+	border-radius: 50%;
+	pointer-events: none;
+}
+
+.disk-light {
+	background: linear-gradient(
+		to bottom,
+		transparent,
+		rgba(255, 255, 255, 0.3),
+		transparent
+	);
+	animation: reflection 20s infinite ease-in-out;
+}
+
+.disk-light-alt {
+	background: linear-gradient(
+		-160deg,
+		transparent 40%,
+		rgba(255, 255, 255, 0.1) 50%,
+		transparent 60%
+	);
+}
+
+@keyframes reflection {
+	0%,
+	100% {
+		opacity: 0.5;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+.album-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30%;
+	height: 30%;
+	background: var(--accent);
+	border-radius: 50%;
+	z-index: 10;
+	position: relative;
+}
+
+.album-icon {
+	color: white;
+	font-size: 0.875rem;
+	font-weight: bold;
+}
+
+.disk-hole {
+	position: absolute;
+	width: 4px;
+	height: 4px;
+	background: white;
+	border-radius: 50%;
+	z-index: 15;
+}
+
+/* Player Controls */
+.player-controls-board {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin: 1rem 0;
+}
+
+.control-btn {
+	background: var(--bg-secondary);
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	color: var(--text-primary);
+	transition: all 0.3s ease;
+	font-size: 0.75rem;
+}
+
+.control-btn:hover {
+	border-color: var(--accent);
+	transform: translateY(-1px);
+}
+
+.play-pause-container {
+	position: relative;
+	width: 32px;
+	height: 32px;
+}
+
+.play-btn,
+.pause-btn {
+	position: absolute;
+	top: 0;
+	left: 0;
+	transition: opacity 0.3s ease;
+}
+
+.hidden {
+	opacity: 0;
+	pointer-events: none;
+}
+
+.track-info {
+	text-align: center;
+	margin-top: 0.5rem;
+}
+
+.track-name {
+	font-weight: 500;
+	margin-bottom: 0.25rem;
+	font-size: 0.875rem;
+}
+
+.track-status {
+	color: var(--text-secondary);
+	font-size: 0.75rem;
+}
+
+/* Shortcuts hint */
+.shortcuts-hint {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 100;
+	background: var(--window-header);
+	color: var(--window-text);
+	padding: 0.5rem 1rem;
+	border-radius: 20px;
+	font-size: 0.75rem;
+	box-shadow: 0 2px 8px var(--shadow);
+	transition: all 0.3s ease;
+}
+
+.shortcuts-text {
+	opacity: 0.8;
+}
+
+/* Floating reactions */
+.reaction {
+	position: fixed;
+	font-size: 1.5rem;
+	pointer-events: none;
+	z-index: 1000;
+	animation: float-up 2s ease-out forwards;
+}
+
+@keyframes float-up {
+	0% {
+		opacity: 1;
+		transform: translateY(0px) scale(1);
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-80px) scale(1.2);
+	}
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+	.app-content {
+		flex-direction: column;
+		align-items: center;
+		padding: 100px 1rem 80px;
+	}
+
+	.task-window,
+	.music-window {
+		width: 100%;
+		max-width: 400px;
+		position: static;
+	}
+
+	.music-window {
+		margin-top: 1rem;
+	}
+
+	.shortcuts-hint {
+		position: static;
+		transform: none;
+		margin-top: 1rem;
+		display: inline-block;
+	}
+}
+
+/* Scrollbar styling */
+.window-content::-webkit-scrollbar {
+	width: 6px;
+}
+
+.window-content::-webkit-scrollbar-track {
+	background: var(--bg-secondary);
+}
+
+.window-content::-webkit-scrollbar-thumb {
+	background: var(--border);
+	border-radius: 3px;
+}
+
+.window-content::-webkit-scrollbar-thumb:hover {
+	background: var(--text-secondary);
+}
+
+@font-face {
+	font-family: 'Architype Stedelijk';
+	src: url('https://db.onlinewebfonts.com/t/fbf4b903ab671383e79e189b4e1f356e.eot');
+	src: url('https://db.onlinewebfonts.com/t/fbf4b903ab671383e79e189b4e1f356e.eot?#iefix')
+			format('embedded-opentype'),
+		url('https://db.onlinewebfonts.com/t/fbf4b903ab671383e79e189b4e1f356e.woff2')
+			format('woff2'),
+		url('https://db.onlinewebfonts.com/t/fbf4b903ab671383e79e189b4e1f356e.woff')
+			format('woff'),
+		url('https://db.onlinewebfonts.com/t/fbf4b903ab671383e79e189b4e1f356e.ttf')
+			format('truetype'),
+		url('https://db.onlinewebfonts.com/t/fbf4b903ab671383e79e189b4e1f356e.svg#Architype Stedelijk W00')
+			format('svg');
+}
