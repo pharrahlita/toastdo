@@ -123,7 +123,7 @@ body {
 	z-index: 10;
 	display: flex;
 	gap: 2rem;
-	padding: 200px 2rem 60px;
+	padding: 170px 2rem 60px;
 	min-height: 100vh;
 	align-items: flex-start;
 	justify-content: center;
@@ -200,6 +200,7 @@ body {
 	color: var(--window-text);
 	user-select: none;
 	letter-spacing: 10px;
+	text-align: center;
 }
 
 .window-close {
@@ -216,7 +217,7 @@ body {
 }
 
 .window-close:hover {
-	background-color: rgba(255, 0, 0, 0.8);
+	background-color: rgba(112, 46, 46, 0.8);
 }
 
 /* Window content */
