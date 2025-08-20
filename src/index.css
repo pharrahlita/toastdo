@@ -18,7 +18,7 @@
 
 [data-theme='dark'] {
 	/* Dark theme */
-	--bg-primary: #3a2b21;
+	--bg-primary: #1c120b;
 	--bg-secondary: #2d2d2d;
 	--text-primary: #e8e8e8;
 	--text-secondary: #b8b8b8;
@@ -38,6 +38,22 @@
 	padding: 0;
 }
 
+/* Hide default cursor globally */
+*,
+*::before,
+*::after {
+	cursor: none !important;
+}
+
+html {
+	cursor: none !important;
+}
+
+/* Force cursor none on specific elements */
+input, textarea, button, a, select, option {
+	cursor: none !important;
+}
+
 body {
 	font-family: 'Architype Stedelijk', sans-serif;
 	letter-spacing: 2.5px;
@@ -48,6 +64,7 @@ body {
 	transition: background-color 0.3s ease, color 0.3s ease;
 	min-height: 100vh;
 	overflow-x: hidden;
+	cursor: none;
 }
 
 /* App container with background */
@@ -83,10 +100,6 @@ body {
 	height: 150px;
 	overflow: hidden;
 	transition: all 0.3s ease;
-}
-
-.capybara-logo:hover {
-	transform: translateX(-50%) scale(1.1);
 }
 
 .capybara-logo img {
@@ -129,12 +142,19 @@ body {
 	justify-content: center;
 }
 
-/* Right side container for shelf and music player */
-.right-side {
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
-	align-items: center;
+/* Music player fixed to bottom right */
+.music-player-fixed {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 50;
+}
+
+/* Control icons */
+.control-icon {
+	width: 16px;
+	height: 16px;
+	object-fit: contain;
 }
 
 /* Window styling */
@@ -448,7 +468,7 @@ body {
 	justify-content: center;
 	align-items: flex-end;
 	gap: 1rem;
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.1rem;
 }
 
 .digital-clock {
@@ -459,8 +479,9 @@ body {
 	width: 120px;
 	height: 50px;
 	background: #e1e0de;
-	border-radius: 5px;
-	box-shadow: 0 2px 8px var(--shadow);
+	border-radius: 15px;
+	box-shadow: 0 4px 12px var(--shadow);
+	transition: all 0.3s ease;
 }
 
 .clock-screen {
@@ -483,7 +504,7 @@ body {
 }
 
 .plant {
-	height: 80px;
+	height: 10px;
 	width: 40px;
 	display: flex;
 	align-items: flex-end;
@@ -491,8 +512,21 @@ body {
 }
 
 .plant-icon {
-	font-size: 2rem;
-	line-height: 1;
+	width: 11rem;
+	height: 11rem;
+	object-fit: contain;
+	transform: translateY(64px);
+	filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes gentle-sway {
+	0%,
+	100% {
+		transform: translateY(58px) rotate(-1deg);
+	}
+	50% {
+		transform: translateY(56px) rotate(1deg);
+	}
 }
 
 .shelf {
@@ -505,10 +539,15 @@ body {
 
 /* Standalone Shelf (outside windows) */
 .shelf-standalone {
-	margin-bottom: 1.5rem;
+	position: fixed;
+	top: 250px;
+	left: 20px;
+	z-index: 40;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 200px;
+	min-height: 100px;
 }
 
 /* Standalone Music Player (outside windows) */
@@ -518,16 +557,14 @@ body {
 	align-items: center;
 	gap: 1rem;
 	padding: 1.5rem;
-	background: var(--window-bg);
-	border-radius: 12px;
-	border: 2px solid var(--border);
-	box-shadow: 0 4px 12px var(--shadow);
 	transition: all 0.3s ease;
+	width: 200px;
+	min-height: 300px;
+	position: relative;
 }
 
 .music-player-standalone:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 6px 20px var(--shadow);
 }
 
 /* Player Section */
@@ -540,9 +577,14 @@ body {
 
 .player-cable {
 	width: 4px;
-	height: 20px;
-	background: #666;
+	height: 100vh;
+	background: #f5f3ef;
 	border-radius: 2px;
+	position: absolute;
+	top: 70%;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: -1;
 }
 
 .player-box {
@@ -551,10 +593,16 @@ body {
 	align-items: center;
 	width: 120px;
 	height: 120px;
-	background: white;
-	border-radius: 10px;
-	box-shadow: 0 4px 12px var(--shadow);
+	background: #f5f3ef;
+	border-radius: 20px;
+	box-shadow: 0 6px 16px var(--shadow), inset 0 2px 4px rgba(255, 255, 255, 0.7);
 	position: relative;
+	transition: all 0.3s ease;
+}
+
+.player-box:hover {
+	transform: translateY(-2px) scale(1.02);
+	box-shadow: 0 8px 24px var(--shadow), inset 0 2px 4px rgba(255, 255, 255, 0.8);
 }
 
 .disk {
@@ -705,37 +753,77 @@ body {
 .track-info {
 	text-align: center;
 	margin-top: 0.5rem;
+	width: 100%;
+	min-height: 50px;
 }
 
 .track-name {
 	font-weight: 500;
 	margin-bottom: 0.25rem;
 	font-size: 0.875rem;
+	min-height: 1.2em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .track-status {
 	color: var(--text-secondary);
 	font-size: 0.75rem;
+	min-height: 1em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
-/* Shortcuts hint */
-.shortcuts-hint {
+/* Help button with shortcuts tooltip */
+.help-button {
+	letter-spacing: 8px;
 	position: fixed;
 	bottom: 20px;
-	left: 50%;
-	transform: translateX(-50%);
+	left: 20px;
 	z-index: 100;
+	color: var(--text-secondary);
+	padding: 0.5rem 0.75rem;
+	font-size: 0.875rem;
+	font-family: 'Architype Stedelijk';
+	cursor: help;
+	transition: all 0.3s ease;
+	user-select: none;
+}
+
+.help-button:hover {
+	color: var(--text-primary);
+	transform: scale(1.1);
+}
+
+.shortcuts-tooltip {
+	position: absolute;
+	bottom: 100%;
+	left: 0;
+	margin-bottom: 10px;
 	background: var(--window-header);
 	color: var(--window-text);
-	padding: 0.5rem 1rem;
-	border-radius: 20px;
+	padding: 0.75rem 1rem;
+	border-radius: 8px;
 	font-size: 0.75rem;
-	box-shadow: 0 2px 8px var(--shadow);
+	box-shadow: 0 4px 12px var(--shadow);
+	opacity: 0;
+	transform: translateY(10px);
 	transition: all 0.3s ease;
+	pointer-events: none;
+	white-space: nowrap;
+}
+
+.help-button:hover .shortcuts-tooltip {
+	opacity: 1;
+	transform: translateY(0);
+	font-family: monospace;
 }
 
 .shortcuts-text {
-	opacity: 0.8;
+	opacity: 0.9;
+	line-height: 1.6;
 }
 
 /* Floating reactions */
@@ -816,4 +904,146 @@ body {
 			format('truetype'),
 		url('https://db.onlinewebfonts.com/t/fbf4b903ab671383e79e189b4e1f356e.svg#Architype Stedelijk W00')
 			format('svg');
+}
+
+/* Hide default cursor globally */
+*,
+*::before,
+*::after {
+	cursor: none !important;
+}
+
+/* Custom Cursor Styles */
+.cursor-dot,
+.cursor-outline {
+	position: fixed;
+	top: 0;
+	left: 0;
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+	z-index: 10000;
+}
+
+.cursor-dot {
+	width: 6px;
+	height: 6px;
+	background-color: #d5cdb9;
+	border-radius: 50%;
+	position: fixed;
+	transform: translate(-50%, -50%);
+	z-index: 10000;
+	pointer-events: none;
+}
+
+.cursor-dot.hovering {
+	width: 6px;
+	height: 6px;
+	background-color: #d5cdb9;
+	z-index: 10000;
+}
+
+@keyframes pop-grow {
+	0% {
+		transform: translate(-50%, -50%) scale(0);
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(1.2);
+	}
+}
+
+.cursor-outline {
+	width: 32px;
+	height: 32px;
+	border: 1.5px solid #d5cdb9;
+	border-radius: 50%;
+	position: fixed;
+	transform: translate(-50%, -50%) scale(1);
+	transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+	z-index: 10000;
+	pointer-events: none;
+}
+
+.cursor-outline.hovering {
+	animation: pop-grow 1s forwards;
+	background-color: #452323ab;
+	border: 0;
+}
+
+/* Light backgrounds - contrast adjustments */
+.cursor-outline.cursor-dark {
+	border: 1.5px solid #452323ab;
+}
+
+.cursor-dot.cursor-dark {
+	background-color: #452323ab;
+}
+
+.cursor-outline.cursor-dark.hovering {
+	border: 0;
+	background-color: #452323c0;
+	animation: pop-grow 1s forwards;
+}
+
+.cursor-dot.cursor-dark.hovering {
+	width: 6px;
+	height: 6px;
+	background-color: #887b7b;
+	z-index: 10000;
+}
+
+/* Light theme cursor styles */
+[data-theme='light'] .cursor-dot.cursor-light-theme {
+	background-color: #3a2b21; /* Dark brown for light theme */
+}
+
+[data-theme='light'] .cursor-dot.cursor-light-theme.hovering {
+	background-color: #3a2b21;
+}
+
+[data-theme='light'] .cursor-outline.cursor-light-theme {
+	border: 1.5px solid #3a2b21;
+}
+
+[data-theme='light'] .cursor-outline.cursor-light-theme.hovering {
+	background-color: #3a2b21aa;
+	border: 0;
+}
+
+/* Light theme cursor on dark backgrounds */
+[data-theme='light'] .cursor-dot.cursor-light-theme.cursor-dark {
+	background-color: #d5cdb9; /* Light color on dark backgrounds */
+}
+
+[data-theme='light'] .cursor-dot.cursor-light-theme.cursor-dark.hovering {
+	background-color: #d5cdb9;
+}
+
+[data-theme='light'] .cursor-outline.cursor-light-theme.cursor-dark {
+	border: 1.5px solid #d5cdb9;
+}
+
+[data-theme='light'] .cursor-outline.cursor-light-theme.cursor-dark.hovering {
+	background-color: #d5cdb9aa;
+	border: 0;
+}
+
+/* Final cursor override - ensure no default cursor anywhere */
+* {
+	cursor: none !important;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, input, textarea, button, select {
+	cursor: none !important;
 }

@@ -72,7 +72,7 @@ export default function MusicPlayer() {
 						</div>
 					</div>
 					<div className="plant">
-						<div className="plant-icon">🌱</div>
+						<img src="/shelfPlant.png" alt="plant" className="plant-icon" />
 					</div>
 				</div>
 				<div className="shelf"></div>
@@ -80,8 +80,53 @@ export default function MusicPlayer() {
 
 			{/* Standalone Music Player - under shelf */}
 			<div className="music-player-standalone">
-				<div className="player-cable"></div>
+				{/* Track Info */}
+				<div className="track-info">
+					<div className="track-name">{LOFI_TRACKS[currentTrack].name}</div>
+					<div className="track-status">
+						{isPlaying ? 'now playing' : 'paused'} • track {currentTrack + 1} of{' '}
+						{LOFI_TRACKS.length}
+					</div>
+				</div>
+				{/* Controls */}
+				<div className="player-controls-board">
+					<button
+						className="control-btn prev-btn js-prev-button"
+						onClick={prevTrack}
+						title="Previous Track"
+					>
+						<img src="/prev.svg" alt="previous" className="control-icon" />
+					</button>
 
+					<div className="play-pause-container">
+						<button
+							className={`control-btn play-btn js-play-button ${
+								isPlaying ? 'hidden' : ''
+							}`}
+							onClick={toggleMusic}
+							title="Play"
+						>
+							<img src="/play.svg" alt="play" className="control-icon" />
+						</button>
+						<button
+							className={`control-btn pause-btn js-pause-button ${
+								!isPlaying ? 'hidden' : ''
+							}`}
+							onClick={toggleMusic}
+							title="Pause"
+						>
+							<img src="/pause.svg" alt="pause" className="control-icon" />
+						</button>
+					</div>
+
+					<button
+						className="control-btn next-btn js-next-button"
+						onClick={nextTrack}
+						title="Next Track"
+					>
+						<img src="/skip.svg" alt="next" className="control-icon" />
+					</button>
+				</div>{' '}
 				{/* Disk Player */}
 				<div className="player-box">
 					<div
@@ -96,55 +141,8 @@ export default function MusicPlayer() {
 						<div className="disk-hole"></div>
 					</div>
 				</div>
-
-				{/* Controls */}
-				<div className="player-controls-board">
-					<button
-						className="control-btn prev-btn js-prev-button"
-						onClick={prevTrack}
-						title="Previous Track"
-					>
-						⏮
-					</button>
-
-					<div className="play-pause-container">
-						<button
-							className={`control-btn play-btn js-play-button ${
-								isPlaying ? 'hidden' : ''
-							}`}
-							onClick={toggleMusic}
-							title="Play"
-						>
-							▶
-						</button>
-						<button
-							className={`control-btn pause-btn js-pause-button ${
-								!isPlaying ? 'hidden' : ''
-							}`}
-							onClick={toggleMusic}
-							title="Pause"
-						>
-							⏸
-						</button>
-					</div>
-
-					<button
-						className="control-btn next-btn js-next-button"
-						onClick={nextTrack}
-						title="Next Track"
-					>
-						⏭
-					</button>
-				</div>
-
-				{/* Track Info */}
-				<div className="track-info">
-					<div className="track-name">{LOFI_TRACKS[currentTrack].name}</div>
-					<div className="track-status">
-						{isPlaying ? 'now playing' : 'paused'} • track {currentTrack + 1} of{' '}
-						{LOFI_TRACKS.length}
-					</div>
-				</div>
+				{/* Wire coming out bottom */}
+				<div className="player-cable"></div>
 			</div>
 		</>
 	);

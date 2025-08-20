@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import CustomCursor from './components/CustomCursor';
 import MusicPlayer from './components/MusicPlayer';
 import TaskWindow from './components/TaskWindow';
 
@@ -77,6 +78,7 @@ function App() {
 
 	return (
 		<div className="app">
+			<CustomCursor />
 			{/* Background overlay */}
 			<div className="background-overlay"></div>
 			{/* Capybara logo */}
@@ -89,19 +91,26 @@ function App() {
 			</button>
 			{/* Main content */}
 			<div className="app-content">
-				{/* Task Window - Left side */}
+				{/* Task Window - Centered */}
 				<TaskWindow tasks={tasks} setTasks={setTasks} />
-
-				{/* Right side - Shelf and Music Player stacked */}
-				<div className="right-side">
-					<MusicPlayer />
-				</div>
+			</div>
+			{/* Music Player - Bottom right corner */}
+			<div className="music-player-fixed">
+				<MusicPlayer />
 			</div>{' '}
-			{/* Keyboard shortcuts info */}
-			<div className="shortcuts-hint">
-				<div className="shortcuts-text">
-					shortcuts: shift+n=new task • shift+t=theme • shift+space=play/pause •
-					shift+←→=tracks
+			{/* Help button with shortcuts on hover */}
+			<div className="help-button">
+				[?]
+				<div className="shortcuts-tooltip">
+					<div className="shortcuts-text">
+						shift+n = new task
+						<br />
+						shift+t = theme toggle
+						<br />
+						shift+space = play/pause
+						<br />
+						shift+←→ = change tracks
+					</div>
 				</div>
 			</div>
 		</div>
