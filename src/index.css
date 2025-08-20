@@ -2,7 +2,7 @@
 
 :root {
 	/* Light theme */
-	--bg-primary: #7c7364;
+	--bg-primary: #6f6554;
 	--bg-secondary: #e8ddc2;
 	--text-primary: #2d2d2d;
 	--text-secondary: #666666;
@@ -18,7 +18,7 @@
 
 [data-theme='dark'] {
 	/* Dark theme */
-	--bg-primary: #1c120b;
+	--bg-primary: #271d15;
 	--bg-secondary: #2d2d2d;
 	--text-primary: #e8e8e8;
 	--text-secondary: #b8b8b8;
@@ -116,14 +116,14 @@ body {
 /* String light pull cord toggle */
 .string-light-toggle {
 	position: fixed;
-	top: 20px;
-	left: 30px;
+	top: 0px;
+	left: 70px;
 	background: transparent;
 	border: none;
 	cursor: pointer;
 	z-index: 100;
 	width: 20px;
-	height: 80px;
+	height: 100px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -132,11 +132,11 @@ body {
 
 .light-wire {
 	position: absolute;
-	top: 0;
+	top: -100px;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 2px;
-	height: 65px;
+	height: 265px;
 	background: var(--text-secondary);
 	border-radius: 1px;
 	opacity: 0.7;
@@ -145,7 +145,7 @@ body {
 
 .light-bulb {
 	position: absolute;
-	top: 60px;
+	top: 155px;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 14px;
@@ -158,12 +158,12 @@ body {
 
 /* Light mode colors for better visibility */
 [data-theme='light'] .light-wire {
-	background: #3a2b21;
+	background: #22201e;
 }
 
 [data-theme='light'] .light-bulb {
-	background: #3a2b21;
-	border-color: #3a2b21;
+	background: #22201e;
+	border-color: #22201e;
 }
 
 /* Pull cord interaction animations */
@@ -173,7 +173,7 @@ body {
 
 .string-light-toggle:hover .light-wire {
 	opacity: 1;
-	height: 67px;
+	height: 267px;
 }
 
 .string-light-toggle:active .light-bulb {
@@ -182,7 +182,7 @@ body {
 }
 
 .string-light-toggle:active .light-wire {
-	height: 73px !important;
+	height: 273px !important;
 	transition: height 0.1s ease-out;
 }
 
@@ -209,13 +209,13 @@ body {
 
 @keyframes pull-cord-wire {
 	0% {
-		height: 65px;
+		height: 265px;
 	}
 	50% {
-		height: 77px;
+		height: 277px;
 	}
 	100% {
-		height: 65px;
+		height: 265px;
 	}
 }
 
@@ -801,18 +801,18 @@ body {
 }
 
 .control-btn {
-	background: var(--bg-secondary);
-	border: 1px solid var(--border);
+	background: transparent;
+	border: none;
 	border-radius: 4px;
-	width: 32px;
-	height: 32px;
+	width: 48px;
+	height: 48px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
 	color: var(--text-primary);
 	transition: all 0.3s ease;
-	font-size: 0.75rem;
+	font-size: 1rem;
 }
 
 .control-btn:hover {
@@ -822,8 +822,8 @@ body {
 
 .play-pause-container {
 	position: relative;
-	width: 32px;
-	height: 32px;
+	width: 48px;
+	height: 48px;
 }
 
 .play-btn,
