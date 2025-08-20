@@ -50,7 +50,12 @@ html {
 }
 
 /* Force cursor none on specific elements */
-input, textarea, button, a, select, option {
+input,
+textarea,
+button,
+a,
+select,
+option {
 	cursor: none !important;
 }
 
@@ -108,26 +113,110 @@ body {
 	object-fit: cover;
 }
 
-/* Theme toggle */
-.theme-toggle {
+/* String light pull cord toggle */
+.string-light-toggle {
 	position: fixed;
 	top: 20px;
-	right: 20px;
-	background: var(--window-header);
+	left: 30px;
+	background: transparent;
 	border: none;
-	border-radius: 20px;
-	padding: 0.5rem 1rem;
-	color: var(--window-text);
 	cursor: pointer;
-	font-size: 1rem;
-	transition: all 0.3s ease;
 	z-index: 100;
-	box-shadow: 0 2px 8px var(--shadow);
+	width: 20px;
+	height: 80px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
 }
 
-.theme-toggle:hover {
-	transform: translateY(-2px);
-	box-shadow: 0 4px 12px var(--shadow);
+.light-wire {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 2px;
+	height: 65px;
+	background: var(--text-secondary);
+	border-radius: 1px;
+	opacity: 0.7;
+	transition: all 0.4s ease;
+}
+
+.light-bulb {
+	position: absolute;
+	top: 60px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	transition: all 0.4s ease;
+	background: var(--text-secondary);
+	border: 2px solid var(--text-secondary);
+}
+
+/* Light mode colors for better visibility */
+[data-theme='light'] .light-wire {
+	background: #3a2b21;
+}
+
+[data-theme='light'] .light-bulb {
+	background: #3a2b21;
+	border-color: #3a2b21;
+}
+
+/* Pull cord interaction animations */
+.string-light-toggle:hover .light-bulb {
+	transform: translateX(-50%) translateY(2px) scale(1.1);
+}
+
+.string-light-toggle:hover .light-wire {
+	opacity: 1;
+	height: 67px;
+}
+
+.string-light-toggle:active .light-bulb {
+	transform: translateX(-50%) translateY(8px) scale(1.05) !important;
+	transition: transform 0.1s ease-out;
+}
+
+.string-light-toggle:active .light-wire {
+	height: 73px !important;
+	transition: height 0.1s ease-out;
+}
+
+/* Pull animation - triggered on click */
+.string-light-toggle.pulling .light-bulb {
+	animation: pull-cord-handle 0.3s ease-out;
+}
+
+.string-light-toggle.pulling .light-wire {
+	animation: pull-cord-wire 0.3s ease-out;
+}
+
+@keyframes pull-cord-handle {
+	0% {
+		transform: translateX(-50%) translateY(0px);
+	}
+	50% {
+		transform: translateX(-50%) translateY(12px);
+	}
+	100% {
+		transform: translateX(-50%) translateY(0px);
+	}
+}
+
+@keyframes pull-cord-wire {
+	0% {
+		height: 65px;
+	}
+	50% {
+		height: 77px;
+	}
+	100% {
+		height: 65px;
+	}
 }
 
 /* Main content layout */
@@ -541,7 +630,7 @@ body {
 .shelf-standalone {
 	position: fixed;
 	top: 250px;
-	left: 20px;
+	right: 20px;
 	z-index: 40;
 	display: flex;
 	flex-direction: column;
@@ -1032,18 +1121,90 @@ body {
 	cursor: none !important;
 }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, input, textarea, button, select {
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+input,
+textarea,
+button,
+select {
 	cursor: none !important;
 }

@@ -38,6 +38,19 @@ function App() {
 		setTheme(theme === 'light' ? 'dark' : 'light');
 	};
 
+	const handlePullCord = (e) => {
+		// Add pulling animation class
+		e.currentTarget.classList.add('pulling');
+
+		// Remove the class after animation completes
+		setTimeout(() => {
+			e.currentTarget.classList.remove('pulling');
+		}, 300);
+
+		// Toggle the theme
+		toggleTheme();
+	};
+
 	// Keyboard shortcuts
 	useEffect(() => {
 		const handleKeyDown = (e) => {
@@ -86,8 +99,12 @@ function App() {
 				<img src="/logotext.png" alt="logo" />
 			</div>
 			{/* Theme toggle button */}
-			<button className="theme-toggle" onClick={toggleTheme}>
-				{theme === 'light' ? '🌙' : '☀️'}
+			<button
+				className="string-light-toggle hover-target"
+				onClick={handlePullCord}
+			>
+				<div className="light-wire"></div>
+				<div className="light-bulb"></div>
 			</button>
 			{/* Main content */}
 			<div className="app-content">
