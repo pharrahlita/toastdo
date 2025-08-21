@@ -106,7 +106,6 @@ export default function TaskWindow({ tasks, setTasks }) {
 				<span className="player-title">୧ ‧₊˚ 🍮 ⋅ ☆ toastdo.txt</span>
 				<div className="player-controls">
 					<span className="window-hyphen"> — </span>
-					<span className="window-square"> □ </span>
 					<span className="window-close"> x </span>
 				</div>
 			</div>
