@@ -6,9 +6,9 @@ Lightweight React build, playful kaomoji feedback, and a tiny lofi player you ca
 
 No accounts, no bloat, just vibes and done lists.
 
-## Core Ideas
+## Core Features
 
-♡︎.ᐟજ⁀➴ Keep the UI minimal and cosy (dark & light themes)  
+♡︎.ᐟજ⁀➴ minimal and cosy (dark & light themes)  
 ♡︎.ᐟજ⁀➴ Reward actions with subtle kaomoji reactions  
 ♡︎.ᐟજ⁀➴ Make it fast: keyboard shortcuts + local storage  
 ♡︎.ᐟજ⁀➴ Background lofi with play/pause + track switch

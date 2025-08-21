@@ -63,7 +63,7 @@ export default function MusicPlayer() {
 
 	return (
 		<>
-			{/* Shelf with clock and plant - outside window */}
+			{/* Shelf with clock and plant 𓂃 ࣪˖ ִֶָ𐀔 */}
 			<div className="shelf-standalone">
 				<div className="on-shelf">
 					<div className="digital-clock">
@@ -72,7 +72,7 @@ export default function MusicPlayer() {
 						</div>
 					</div>
 					<div className="plant">
-						<img src="/shelfPlant.png" alt="plant" className="plant-icon" />
+						<img src="/shelfPlant.svg" alt="plant" className="plant-icon" />
 					</div>
 				</div>
 				<div className="shelf"></div>
@@ -82,10 +82,12 @@ export default function MusicPlayer() {
 			<div className="music-player-standalone">
 				{/* Track Info */}
 				<div className="track-info">
-					<div className="track-name">{LOFI_TRACKS[currentTrack].name}</div>
+					<div className="track-name">
+						{LOFI_TRACKS[currentTrack].name} <br />
+						𓂃 ࣪˖ ִֶָ𐀔{' '}
+					</div>
 					<div className="track-status">
-						{isPlaying ? 'now playing' : 'paused'} • track {currentTrack + 1} of{' '}
-						{LOFI_TRACKS.length}
+						{isPlaying ? 'now playing' : 'paused'} • track {currentTrack + 1}
 					</div>
 				</div>
 				{/* Controls */}

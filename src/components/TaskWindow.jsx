@@ -116,7 +116,7 @@ export default function TaskWindow({ tasks, setTasks }) {
 					<input
 						type="text"
 						className="add-task-input"
-						placeholder="what needs doing? (。◕‿◕。)"
+						placeholder="⋆˙⟡ — whatchu gotta dooo? ૮꒰ ˶• ༝ •˶꒱ა ♡"
 						value={newTask}
 						onChange={(e) => setNewTask(e.target.value)}
 					/>
@@ -124,8 +124,8 @@ export default function TaskWindow({ tasks, setTasks }) {
 
 				{tasks.length === 0 ? (
 					<div className="empty-state">
-						<span className="empty-kaomoji">(◕‿◕)</span>
-						<p>no tasks yet! start typing to add one</p>
+						<span className="empty-kaomoji">𓂃 ࣪˖ ִֶָ𐀔 </span>
+						<p>no tasks yet! shift + n to add a new task!</p>
 					</div>
 				) : (
 					<>
@@ -196,7 +196,7 @@ export default function TaskWindow({ tasks, setTasks }) {
 									<span className="collapse-icon">
 										{completedCollapsed ? '▶' : '▼'}
 									</span>
-									done ✧(◕‿◕)✧ ({completedTasks.length})
+									⋆౨ৎ˚⟡˖ ࣪completed! ˎˊ˗ ({completedTasks.length})
 								</button>
 								{!completedCollapsed && (
 									<ul className="task-list completed-list">

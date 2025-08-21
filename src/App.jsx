@@ -120,13 +120,13 @@ function App() {
 				[?]
 				<div className="shortcuts-tooltip">
 					<div className="shortcuts-text">
-						shift+n = new task
+						shift + n = new task
 						<br />
-						shift+t = theme toggle
+						shift + t = theme toggle
 						<br />
-						shift+space = play/pause
+						shift + space = play/pause
 						<br />
-						shift+←→ = change tracks
+						shift + ← or → = change tracks
 					</div>
 				</div>
 			</div>
